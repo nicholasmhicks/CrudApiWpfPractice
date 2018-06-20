@@ -27,5 +27,6 @@
 
         <Button Content="Update" HorizontalAlignment="Left" Margin="24,263,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Update"/>
         <Button Content="Delete" HorizontalAlignment="Left" Margin="126,263,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_Delete"/>
+        <Button Content="Create" HorizontalAlignment="Left" Margin="226,263,0,0" VerticalAlignment="Top" Width="75" Click ="Button_Click_Create"/>
     </Grid>
 </Page>

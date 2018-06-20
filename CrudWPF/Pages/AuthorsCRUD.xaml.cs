@@ -143,6 +143,32 @@ namespace CrudWPF.Pages
             this.FillTable(await _da.GetAuthorEntityAsync("api/Authors"));
         }
 
+        private async void Button_Click_Create(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Author authorTemp = new Author();
+                authorTemp.AuthorId = AuthorIdField.Text;
+                authorTemp.FirstName = FirstNameField.Text;
+                authorTemp.SurName = SurnameField.Text;
+                authorTemp.TaxFileNumber = TaxFileNumberField.Text;
 
+                if (authorTemp.FirstName == "Fuck")
+                {
+                    MessageBox.Show("Inappropriate First name, please re-enter");
+                    throw new Exception("Inappropriate name entered");
+                }
+
+                if (await _da.PostAuthorEntityAsync($"api/Authors/{AuthorIdField.Text}", authorTemp))
+                {
+                    this.FillTable(await _da.GetAuthorEntityAsync("api/Authors"));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Create error caught: {ex.Message}");
+            }
+        }
     }
 }
