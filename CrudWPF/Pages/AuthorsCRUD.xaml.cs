@@ -84,28 +84,28 @@ namespace CrudWPF.Pages
         {
             try
             {
-                Author a = new Author();
-                a.AuthorId = AuthorIdField.Text;
-                a.FirstName = FirstNameField.Text;
-                a.SurName = SurnameField.Text;
-                a.TaxFileNumber = TaxFileNumberField.Text;
+                Author authorTemp = new Author();
+                authorTemp.AuthorId = AuthorIdField.Text;
+                authorTemp.FirstName = FirstNameField.Text;
+                authorTemp.SurName = SurnameField.Text;
+                authorTemp.TaxFileNumber = TaxFileNumberField.Text;
 
-                if (a.FirstName == "Fuck")
+                if (authorTemp.FirstName == "Fuck")
                 {
                     MessageBox.Show("Inappropriate First name, please re-enter");
                     throw new Exception("Inappropriate name entered");
                 }
 
-                if (await _da.PutAuthorEntityAsync($"api/Authors/{AuthorIdField.Text}", a))
+                if (await _da.PutAuthorEntityAsync($"api/Authors/{AuthorIdField.Text}", authorTemp))
                 {
                     this.FillTable(await _da.GetAuthorEntityAsync("api/Authors"));
                 }
-                else if (await _da.PostAuthorEntityAsync($"api/Authors/{AuthorIdField.Text}", a))
+                else if (await _da.PostAuthorEntityAsync($"api/Authors/{AuthorIdField.Text}", authorTemp))
                 {
                     this.FillTable(await _da.GetAuthorEntityAsync("api/Authors"));
                 }
 
-                _logger.Trace($"Author id:{a.AuthorId} was updated at {DateTime.Now.ToString()}");
+                _logger.Trace($"Author id:{authorTemp.AuthorId} was updated at {DateTime.Now.ToString()}");
 
             }catch (Exception ex)
             {
